@@ -1,0 +1,95 @@
+type Query {
+
+}
+
+interface CharacterInterface {
+    id: ID!
+    name: String!
+    owner: User!
+    level: Int!
+    hp: HP!
+    ac: Int
+    class: Class!
+    race: Race!
+    subrace: Subrace!
+    abilityScores: AbilityScores!
+    created: Date!
+    alignment: Alignment!
+    weapons: [Weapon]
+    armor: [Armor]
+    darkVision: Int
+}
+type PlayerCharacter implements CharacterInterface {
+}
+type Druid implements CharacterInterface {
+    maxCr: Float
+}
+type NPC implements CharacterInterface {
+}
+type Monster implements CharacterInterface {
+    cr: String
+    abilities: [Ability!]
+    size: String
+    actions: [Action!]
+}
+
+type Action {
+    name: String!
+    description: String!
+}
+type Ability {
+    name: String!
+    description: String!
+}
+
+type AbilityScores {
+    STR: Int!
+    DEX: Int!
+    CON: Int!
+    INT: Int!
+    WIS: Int!
+    CHA: Int!
+}
+type HP {
+    total: Int!
+    penalty: Int
+    bonus: Int
+}
+enum Alignment {
+    LAWFUL_GOOD
+    NEUTRAL_GOOD
+    CHAOTIC_GOOD
+    LAWFUL_NEUTRAL
+    TRUE_NEUTRAL
+    CHAOTIC_NEUTRAL
+    LAWFUL_EVIL
+    NEUTRAL_EVIL
+    CHAOTIC_EVIL
+}
+
+type User {
+    id: ID!
+    username: String!
+    name: String
+    created: Date!
+}
+
+interface RaceInterface {
+    id: ID!
+    name: String!
+    description: String
+    speed: Int!
+}
+type Race implements RaceInterface {
+    subraces: [Subrace!]
+}
+type Subrace implements RaceInterface {
+    parent: Race!
+}
+
+type Class {
+    id: ID!
+    name: String
+    languages: [String!]
+    hitDice: Int
+}
